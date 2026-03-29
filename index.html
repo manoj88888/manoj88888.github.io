@@ -197,36 +197,34 @@ body { font-family:Segoe UI; background:#f8fafc; color:#0f172a; }
 
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script>
+AOS.init();
+
+/* Typing Animation */
 const texts = ["Laravel Developer", "API Specialist", "Freelancer"];
-let index = 0;
-let charIndex = 0;
-let currentText = "";
-let isDeleting = false;
+let i = 0, j = 0, current = "", isDeleting = false;
 
-function typeEffect() {
-    currentText = texts[index];
-
-    if (!isDeleting) {
-        charIndex++;
+function type() {
+    current = texts[i];
+    if (isDeleting) {
+        document.getElementById("typing").innerHTML = current.substring(0, j--);
     } else {
-        charIndex--;
+        document.getElementById("typing").innerHTML = current.substring(0, j++);
     }
 
-    document.getElementById("typing").innerHTML =
-        currentText.substring(0, charIndex);
+    if (!isDeleting && j === current.length) {
+        setTimeout(() => isDeleting = true, 1200);
+        return;
+    }
 
-    if (!isDeleting && charIndex === currentText.length) {
-        setTimeout(() => isDeleting = true, 1200); // pause at full word
-    } 
-    else if (isDeleting && charIndex === 0) {
+    if (isDeleting && j === 0) {
         isDeleting = false;
-        index = (index + 1) % texts.length;
+        i = (i + 1) % texts.length;
     }
 
-    setTimeout(typeEffect, isDeleting ? 40 : 80);
+    setTimeout(type, isDeleting ? 50 : 100);
 }
 
-typeEffect();
+type();
 </script>
 
 </body>
