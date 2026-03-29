@@ -55,10 +55,31 @@ body { font-family:Segoe UI; background:#f8fafc; color:#0f172a; }
     border-radius:50%;
     font-size:20px;
 }
+        .header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .logo {
+        width: 50px;
+        height: 50px;
+        object-fit: contain;
+    }
+
+    .name {
+        font-size: 20px;
+        font-weight: bold;
+    }
 </style>
 </head>
 
 <body>
+    <div class="header">
+        <img src="logo.png" alt="Manoj Kagadiya Logo" class="logo">
+        <div class="name">Manoj Kagadiya | Laravel Developer</div>
+    </div>
 
 <!-- HERO -->
 <section class="hero">
