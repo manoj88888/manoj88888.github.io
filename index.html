@@ -199,32 +199,35 @@ body { font-family:Segoe UI; background:#f8fafc; color:#0f172a; }
 <script>
 AOS.init();
 
-/* Typing Animation */
+/* FIXED Typing Animation */
 const texts = ["Laravel Developer", "API Specialist", "Freelancer"];
-let i = 0, j = 0, current = "", isDeleting = false;
+let index = 0;
+let charIndex = 0;
+let isDeleting = false;
 
-function type() {
-    current = texts[i];
+function typeEffect() {
+    let current = texts[index];
+
     if (isDeleting) {
-        document.getElementById("typing").innerHTML = current.substring(0, j--);
+        charIndex--;
     } else {
-        document.getElementById("typing").innerHTML = current.substring(0, j++);
+        charIndex++;
     }
 
-    if (!isDeleting && j === current.length) {
+    document.getElementById("typing").innerHTML = current.substring(0, charIndex);
+
+    if (!isDeleting && charIndex === current.length) {
         setTimeout(() => isDeleting = true, 1200);
-        return;
-    }
-
-    if (isDeleting && j === 0) {
+    } 
+    else if (isDeleting && charIndex === 0) {
         isDeleting = false;
-        i = (i + 1) % texts.length;
+        index = (index + 1) % texts.length;
     }
 
-    setTimeout(type, isDeleting ? 50 : 100);
+    setTimeout(typeEffect, isDeleting ? 40 : 80);
 }
 
-type();
+typeEffect();
 </script>
 
 </body>
